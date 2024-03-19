@@ -3,5 +3,6 @@ const AppColors = {
     PRIMARY: "#ff8a65",
     GRAY: "#8e918f",
     BLACK: "#000",
+    RED: "red",
 }
 export { AppColors }

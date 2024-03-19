@@ -1,7 +1,5 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {AppColors} from '../../theme/colors';
 import {CATEGORIES, FAVORITES, HOME, PROFILE} from '../../utils/routes';
 import {Home2, Category, Profile, Heart} from 'iconsax-react-native';
 
@@ -17,16 +15,6 @@ const TabIcon = ({name, size, color}) => {
     return <Profile size={size} color={color} variant="Bold" />;
   }
 };
-
-// define your styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: AppColors.WHITE,
-  },
-});
 
 //make this component available to the app
 export default TabIcon;

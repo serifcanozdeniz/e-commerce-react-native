@@ -6,12 +6,17 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Cart from '../screens/cart';
 import {CART, TAB} from '../utils/routes';
 import TabNavigator from './TabNavigator';
+import {AppColors} from '../theme/colors';
 
 const Stack = createNativeStackNavigator();
 
-function StackNavigator() {
+function RootNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerBackTitleVisible: false,
+        headerTintColor: AppColors.BLACK,
+      }}>
       <Stack.Screen
         options={{headerShown: false}}
         name={TAB}
@@ -22,4 +27,4 @@ function StackNavigator() {
   );
 }
 
-export default StackNavigator;
+export default RootNavigator;
