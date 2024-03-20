@@ -3,14 +3,14 @@ import React, {Component, useEffect, useState} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import WidgetTitle from '../components/widgets/WidgetTitle';
 import {getRequest} from '../service/verbs';
-import {PRODUCTS_URL} from '../service/urls';
+import {CATEGORY_URL, PRODUCTS_URL} from '../service/urls';
 import WidgetProductCard from '../components/widgets/ProductCard';
 
 // create a component
 const NewArrival = () => {
   const [products, setProducts] = useState([]);
   const getNewArrivalProducts = () => {
-    getRequest(PRODUCTS_URL)
+    getRequest(CATEGORY_URL + "/women's clothing", {limit: 5})
       .then(res => setProducts(res.data))
       .catch(err => console.log(err));
   };

@@ -3,13 +3,17 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {height, width} from '../utils/constants';
 import {AppColors} from '../theme/colors';
+import {useNavigation} from '@react-navigation/native';
+import {PRODUCTLIST} from '../utils/routes';
 
 // create a component
 const Introduction = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Image source={require('../assets/nike.png')} style={styles.image} />
       <TouchableOpacity
+        onPress={() => navigation.navigate(PRODUCTLIST)}
         style={{
           position: 'absolute',
           bottom: 40,

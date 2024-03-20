@@ -5,12 +5,13 @@ import WidgetTitle from '../components/widgets/WidgetTitle';
 import {getRequest} from '../service/verbs';
 import WidgetProductCard from '../components/widgets/ProductCard';
 import {CATEGORY_URL} from '../service/urls';
+import CategorySelect from '../components/widgets/CategorySelect';
 
 // create a component
 const BestSeller = () => {
   const [products, setProducts] = useState([]);
-  const getBestSellerProducts = () => {
-    getRequest(CATEGORY_URL + "/men's clothing")
+  const getBestSellerProducts = (category = "men's clothing") => {
+    getRequest(CATEGORY_URL + `/${category}`, {limit: 5, sort: 'desc'})
       .then(res => setProducts(res.data))
       .catch(err => console.log(err));
   };
@@ -21,6 +22,7 @@ const BestSeller = () => {
   return (
     <View style={styles.container}>
       <WidgetTitle title={'Best Seller'} />
+      <CategorySelect onSelect={value => getBestSellerProducts(value)} />
       <FlatList
         showsHorizontalScrollIndicator={false}
         horizontal

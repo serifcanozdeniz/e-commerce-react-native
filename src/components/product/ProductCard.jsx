@@ -6,7 +6,7 @@ import {AppColors} from '../../theme/colors';
 import {Heart} from 'iconsax-react-native';
 
 // create a component
-const WidgetProductCard = ({item}) => {
+const ProductCard = ({item}) => {
   return (
     <View style={styles.container}>
       <Image
@@ -62,10 +62,12 @@ const WidgetProductCard = ({item}) => {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    width: width * 0.4,
+    width: width / 2,
     margin: 5,
+    flex: 1,
+    marginVertical: 15,
   },
 });
 
 //make this component available to the app
-export default WidgetProductCard;
+export default ProductCard;
