@@ -20,7 +20,7 @@ const ProductCard = ({item}) => {
   const navigation = useNavigation();
   return (
     <Pressable
-      onPress={() => navigation.navigate(PRODUCTDETAIL)}
+      onPress={() => navigation.navigate(PRODUCTDETAIL, {item: item})}
       style={styles.container}>
       <Image
         source={{uri: item.image}}

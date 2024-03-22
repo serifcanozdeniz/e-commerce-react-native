@@ -1,14 +1,27 @@
 //import liraries
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Pressable,
+} from 'react-native';
 import {height, width} from '../../utils/constants';
 import {AppColors} from '../../theme/colors';
 import {Heart} from 'iconsax-react-native';
+import {useNavigation} from '@react-navigation/native';
+import {PRODUCTDETAIL} from '../../utils/routes';
 
 // create a component
 const WidgetProductCard = ({item}) => {
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
+    <Pressable
+      onPress={() => navigation.navigate(PRODUCTDETAIL, {item: item})}
+      style={styles.container}>
       <Image
         source={{uri: item.image}}
         style={{
@@ -55,7 +68,7 @@ const WidgetProductCard = ({item}) => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

@@ -16,7 +16,6 @@ const Button = props => {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: AppColors.PRIMARY,
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeightnt: '500',
+    fontWeight: '500',
     color: AppColors.WHITE,
   },
 });
