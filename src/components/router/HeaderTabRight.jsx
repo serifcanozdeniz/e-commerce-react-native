@@ -1,15 +1,17 @@
 //import liraries
-import React, {Component, useState} from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {SearchNormal, ShoppingCart} from 'iconsax-react-native';
 import {AppColors} from '../../theme/colors';
 import {useNavigation} from '@react-navigation/native';
 import {CART} from '../../utils/routes';
+import Badge from '../cart/Badge';
+import StoreContext from '../../context';
 
 // create a component
 const HeaderTabRight = () => {
-  const [count, setCount] = useState(0);
   const navigation = useNavigation();
+  const {cart} = useContext(StoreContext);
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button}>
@@ -18,26 +20,7 @@ const HeaderTabRight = () => {
       <TouchableOpacity
         onPress={() => navigation.navigate(CART)}
         style={styles.button}>
-        {count > 0 && (
-          <View
-            style={{
-              backgroundColor: AppColors.PRIMARY,
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: 20,
-              height: 20,
-              borderRadius: 100,
-              position: 'absolute',
-              zIndex: 99,
-              right: -10,
-              top: -8,
-            }}>
-            <Text
-              style={{color: AppColors.WHITE, fontSize: 12, fontWeight: '500'}}>
-              {count}
-            </Text>
-          </View>
-        )}
+        {cart?.length > 0 && <Badge count={cart?.length} />}
         <ShoppingCart size={28} color={AppColors.BLACK} variant="Bold" />
       </TouchableOpacity>
     </View>

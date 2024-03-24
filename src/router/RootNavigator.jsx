@@ -29,6 +29,7 @@ function RootNavigator() {
       <Stack.Screen
         options={({route, navigation}) => ({
           headerRight: ({focused, color, size}) => <HeaderTabRight />,
+          title: route?.params?.title,
         })}
         name={PRODUCTLIST}
         component={ProductList}

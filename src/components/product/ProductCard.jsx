@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component} from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -14,10 +14,12 @@ import {Heart} from 'iconsax-react-native';
 import {useNavigation} from '@react-navigation/native';
 import {PRODUCTDETAIL} from '../../utils/routes';
 import Button from '../ui/Button';
+import StoreContext from '../../context';
 
 // create a component
 const ProductCard = ({item}) => {
   const navigation = useNavigation();
+  const {addCart} = useContext(StoreContext);
   return (
     <Pressable
       onPress={() => navigation.navigate(PRODUCTDETAIL, {item: item})}
@@ -69,7 +71,7 @@ const ProductCard = ({item}) => {
         </View>
       </View>
       <View>
-        <Button title={'Sepete Ekle'} />
+        <Button onPress={() => addCart(item)} title={'Sepete Ekle'} />
       </View>
     </Pressable>
   );

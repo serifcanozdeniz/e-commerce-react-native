@@ -16,6 +16,7 @@ const widgets = [
         component: <NewArrival />,
         isShow: true,
         title: "New Arrival",
+
     },
     {
         id: 3,
@@ -23,6 +24,7 @@ const widgets = [
         component: <BestSeller />,
         isShow: true,
         title: "Best Seller",
+        category: "",
     },
 ]
 export default widgets;

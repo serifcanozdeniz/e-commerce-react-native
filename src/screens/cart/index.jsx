@@ -1,26 +1,25 @@
 //import liraries
-import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {AppColors} from '../../theme/colors';
+import React, {useContext} from 'react';
+import {View, FlatList} from 'react-native';
+import StoreContext from '../../context';
+import CartCard from '../../components/cart/CartCard';
+import {screenStyles} from '../../styles/screenStyle';
+import Summary from '../../components/cart/Summary';
 
 // create a component
 const Cart = () => {
+  const {cart} = useContext(StoreContext);
   return (
-    <View style={styles.container}>
-      <Text>Sepetim</Text>
+    <View style={screenStyles.container}>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={cart}
+        renderItem={({item}) => <CartCard item={item} />}
+        keyExtractor={item => item.id}
+      />
+      <Summary />
     </View>
   );
 };
 
-// define your styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: AppColors.WHITE,
-  },
-});
-
-//make this component available to the app
 export default Cart;

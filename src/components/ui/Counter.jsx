@@ -5,7 +5,7 @@ import {AddCircle, MinusCirlce} from 'iconsax-react-native';
 import {AppColors} from '../../theme/colors';
 
 // create a component
-const Counter = ({onChange}) => {
+const Counter = ({onChange, size = 35}) => {
   const [count, setCount] = useState(0);
 
   const decrease = () => {
@@ -23,7 +23,7 @@ const Counter = ({onChange}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={decrease} style={styles.button}>
-        <MinusCirlce size={35} variant="Outline" color={AppColors.BLACK} />
+        <MinusCirlce size={size} variant="Outline" color={AppColors.BLACK} />
       </TouchableOpacity>
       <Text
         style={{
@@ -35,7 +35,7 @@ const Counter = ({onChange}) => {
         {count}
       </Text>
       <TouchableOpacity onPress={increase} style={styles.button}>
-        <AddCircle size={35} variant="Bold" color={AppColors.BLACK} />
+        <AddCircle size={size} variant="Bold" color={AppColors.BLACK} />
       </TouchableOpacity>
     </View>
   );

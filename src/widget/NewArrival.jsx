@@ -20,7 +20,7 @@ const NewArrival = () => {
   }, []);
   return (
     <View style={styles.container}>
-      <WidgetTitle title={'New Arrival'} />
+      <WidgetTitle title={'New Arrival'} category="women's clothing" />
       <FlatList
         showsHorizontalScrollIndicator={false}
         horizontal

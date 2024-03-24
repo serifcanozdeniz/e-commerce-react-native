@@ -17,11 +17,14 @@ import {getRequest} from '../../service/verbs';
 import {PRODUCTS_URL} from '../../service/urls';
 import Spinner from '../../components/ui/Spinner';
 import {Heart, Star} from 'iconsax-react-native';
+import StoreContext from '../../context';
+import {useContext} from 'react';
 
 // create a component
 const ProductDetail = ({route}) => {
   const [product, setProduct] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const {addCart} = useContext(StoreContext);
 
   const {item} = route?.params;
   const getProductDetail = () => {
@@ -47,7 +50,7 @@ const ProductDetail = ({route}) => {
                 source={{uri: product?.image}}
                 style={{
                   width: width,
-                  height: height * 0.55,
+                  height: height * 0.15,
                   resizeMode: 'contain',
                 }}
               />
@@ -127,23 +130,22 @@ const ProductDetail = ({route}) => {
       </View>
       <View
         style={{
-          position: 'absolute',
-          bottom: 0,
           paddingBottom: 20,
           paddingHorizontal: 10,
           height: height * 0.1,
           backgroundColor: AppColors.WHITE,
-          width: width,
           flexDirection: 'row',
           borderTopWidth: 1,
           borderColor: AppColors.SOFTGRAY,
+          justifyContent: 'center',
+          alignItems: 'center',
         }}>
         <View style={{flex: 1, justifyContent: 'center'}}>
           <Counter onChange={value => console.log(value)} />
         </View>
 
         <View style={{flex: 2, justifyContent: 'center'}}>
-          <Button title={'Sepete Ekle'} />
+          <Button onPress={() => addCart(item)} title={'Sepete Ekle'} />
         </View>
       </View>
     </SafeAreaView>

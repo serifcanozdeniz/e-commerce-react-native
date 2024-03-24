@@ -21,7 +21,7 @@ const BestSeller = () => {
   }, []);
   return (
     <View style={styles.container}>
-      <WidgetTitle title={'Best Seller'} />
+      <WidgetTitle title={'Best Seller'} category="men's clothing" />
       <CategorySelect onSelect={value => getBestSellerProducts(value)} />
       <FlatList
         showsHorizontalScrollIndicator={false}
