@@ -1,11 +1,31 @@
 //import liraries
-import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {Component, useContext} from 'react';
+import {View, Text, StyleSheet, Alert} from 'react-native';
 import Button from '../ui/Button';
 import {AppColors} from '../../theme/colors';
+import StoreContext from '../../context';
+import {useNavigation} from '@react-navigation/native';
+import {CHECKOUT, LOGIN} from '../../utils/routes';
 
 // create a component
 const Summary = () => {
+  const {isLogin} = useContext(StoreContext);
+  const navigation = useNavigation();
+
+  const checkOut = () => {
+    if (isLogin) {
+      navigation.navigate(CHECKOUT);
+    } else {
+      Alert.alert('Giriş Yap', 'Satın alma işlemi için giriş yapınız.', [
+        {
+          text: 'Vazgeç',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'Giriş Yap', onPress: () => navigation.navigate(LOGIN)},
+      ]);
+    }
+  };
   return (
     <View style={styles.container}>
       <View
@@ -48,7 +68,7 @@ const Summary = () => {
         <Text style={{fontWeight: 'bold'}}>800</Text>
       </View>
 
-      <Button title="Ödemeye Geç" />
+      <Button onPress={checkOut} title="Ödemeye Geç" />
     </View>
   );
 };
