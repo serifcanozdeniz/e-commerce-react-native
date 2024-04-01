@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component} from 'react';
+import React, {Component, useContext} from 'react';
 import {
   View,
   Text,
@@ -7,16 +7,34 @@ import {
   Image,
   TouchableOpacity,
   Pressable,
+  Alert,
 } from 'react-native';
 import {height, width} from '../../utils/constants';
 import {AppColors} from '../../theme/colors';
 import {Heart} from 'iconsax-react-native';
 import {useNavigation} from '@react-navigation/native';
-import {PRODUCTDETAIL} from '../../utils/routes';
+import {LOGIN, PRODUCTDETAIL} from '../../utils/routes';
+import StoreContext from '../../context';
 
 // create a component
 const WidgetProductCard = ({item}) => {
   const navigation = useNavigation();
+  const {addFavorites, isLogin} = useContext(StoreContext);
+
+  const checkIsLogin = () => {
+    if (isLogin) {
+      addFavorites(item);
+    } else {
+      Alert.alert('Giriş Yap', 'Favorilere eklemek için için giriş yapınız.', [
+        {
+          text: 'Vazgeç',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'Giriş Yap', onPress: () => navigation.navigate(LOGIN)},
+      ]);
+    }
+  };
 
   return (
     <Pressable
@@ -63,8 +81,12 @@ const WidgetProductCard = ({item}) => {
           </Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <TouchableOpacity>
-            <Heart size="24" color={AppColors.RED} variant="Bold" />
+          <TouchableOpacity onPress={() => checkIsLogin()}>
+            {item.favorite ? (
+              <Heart size="24" color={AppColors.RED} variant="Bold" />
+            ) : (
+              <Heart size="24" color={AppColors.RED} variant="Outline" />
+            )}
           </TouchableOpacity>
         </View>
       </View>

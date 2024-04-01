@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {screenStyles} from '../../styles/screenStyle';
 import {height, width} from '../../utils/constants';
@@ -19,14 +20,33 @@ import Spinner from '../../components/ui/Spinner';
 import {Heart, Star} from 'iconsax-react-native';
 import StoreContext from '../../context';
 import {useContext} from 'react';
+import {LOGIN} from '../../utils/routes';
 
 // create a component
-const ProductDetail = ({route}) => {
+const ProductDetail = ({route, navigation}) => {
   const [product, setProduct] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const {addCart} = useContext(StoreContext);
+  const {addFavorites} = useContext(StoreContext);
+  const {isLogin} = useContext(StoreContext);
 
   const {item} = route?.params;
+
+  const checkIsLogin = () => {
+    if (isLogin) {
+      addFavorites(item);
+    } else {
+      Alert.alert('Giriş Yap', 'Favorilere eklemek için için giriş yapınız.', [
+        {
+          text: 'Vazgeç',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'Giriş Yap', onPress: () => navigation.navigate(LOGIN)},
+      ]);
+    }
+  };
+
   const getProductDetail = () => {
     setLoading(true);
     getRequest(PRODUCTS_URL + `/${item.id}`)
@@ -105,12 +125,21 @@ const ProductDetail = ({route}) => {
                     padding: 5,
                   }}>
                   <TouchableOpacity
+                    onPress={() => checkIsLogin()}
                     style={{
                       backgroundColor: AppColors.SOFTGRAY,
                       padding: 5,
                       borderRadius: 100,
                     }}>
-                    <Heart size={28} color={AppColors.RED} variant="Bold" />
+                    {item.favorite ? (
+                      <Heart size="24" color={AppColors.RED} variant="Bold" />
+                    ) : (
+                      <Heart
+                        size="24"
+                        color={AppColors.RED}
+                        variant="Outline"
+                      />
+                    )}
                   </TouchableOpacity>
                 </View>
               </View>
